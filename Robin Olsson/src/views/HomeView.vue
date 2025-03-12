@@ -23,6 +23,11 @@
                 product.category.toLowerCase() === this.selectCategory.toLowerCase()
             )
         }
+    },
+    methods: {
+        productInfo(productId) {
+            this.$router.push(`/product/${productId}`)
+        }
     }
   }
 </script>
@@ -34,11 +39,11 @@
     <option value="audio">Ljud</option>
     <option value="gaming">Gaming</option>
     <option value="mobile">Mobil</option>
-    <option value="tv">tv</option>
+    <option value="tv">Tv</option>
   </select>
 </div>
 <div class="content">
-    <div class="product-card" v-for="product in filteredProducts" :key="product.id">
+    <div class="product-card" v-for="product in filteredProducts" :key="product.id" @click="productInfo(product.id)">
         <img class="product_image" :src="product.image" alt="Produktbild"
             v-on:error="product.image = defaultImage"/>
             <div class="price">
@@ -82,7 +87,7 @@ select {
 .product-card {
     padding: 10px;
     text-align: center;
-    height: 400px;
+    height: 420px;
     width: 280px;
     cursor: pointer;
     transition: 0.4s;
@@ -103,9 +108,8 @@ select {
 
 .product_price {
     display: inline;
-    background-color: rgb(245, 129, 87);
-    box-shadow: 0 0 2px 2px rgb(97, 96, 96);
     padding: 10px;
+    font-size: x-large;
 }
 .button_container {
     margin-top: 1.2em;
@@ -115,6 +119,10 @@ select {
     background-color: rgb(172, 226, 172);
     padding: 5px;
     cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+}
+.product_button:hover {
+    transform: scale(1.2);
 }
 .title {
     margin-top: 1em;
