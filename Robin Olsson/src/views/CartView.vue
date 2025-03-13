@@ -11,20 +11,26 @@ export default {
         return {
             defaultImage: 'https://st.depositphotos.com/1695366/1395/v/950/depositphotos_13951325-stock-illustration-cartoon-angry-man-electronics.jpg'
         }
+    },
+    methods: {
+        goBack() {
+            this.$router.push('/')
+        }
     }
 }
 
 </script>
 
 <template>
+    <div><img @click="goBack" src="/assets/arrow.png" alt="Go back icon" class="arrow_back"></div>
 
     <div class="head_cart">
-        <h1>Kundvagn</h1>
+        <h1>Kundkorg</h1>
     </div>
 
     <div class="cart_container">
         <div v-if="cartStore.cart.length === 0">
-            <p>Kundvagnen är tom</p>
+            <p>Kundkorg är tom</p>
         </div>
         <div v-else>
             <div class="cart_list">
@@ -54,6 +60,7 @@ export default {
         align-items: center;
         width: 100vw;
         margin-left: 4em;
+        font-family: myFont;
     }
 
     .cart_container {
@@ -70,6 +77,7 @@ export default {
         gap: 20px;
         flex-wrap: wrap;
         max-width: 1000px;
+        font-family: myFont;
     }
 
     .cart_item {
@@ -91,6 +99,7 @@ export default {
     .cart_summary {
         display: flex;
         flex-direction: column;
+        font-family: myFont;
     }
 
     .cash_out_button {
@@ -119,6 +128,17 @@ export default {
 
     .clear_cart {
         margin-top: 1em;
+    }
+
+    .arrow_back {
+        height: 30px;
+        margin-left: 4em;
+        cursor: pointer;
+    }
+
+    @font-face {
+        font-family: myFamily;
+        src: url(/Fonts/play.ttf);
     }
 
 </style>

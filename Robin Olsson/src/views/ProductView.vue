@@ -28,6 +28,8 @@ export default {
 </script>
 
 <template>
+    <div><img @click="goBack" src="/assets/arrow.png" alt="Go back icon" class="arrow_back"></div>
+
     <div class="content_container" v-if="product">
         <div class="image_container">
             <img class="product_image" :src="product.image" alt="Produktbild">
@@ -43,13 +45,15 @@ export default {
             </div>
     </div>
 
-    <div>
-        <button class="back_button" @click="goBack">Tillbaka</button>
-    </div>
-
 </template>
 
 <style scoped>
+
+    .arrow_back {
+        height: 30px;
+        margin-left: 4em;
+        cursor: pointer;
+    }
 
     .content_container {
         display: flex;
@@ -108,13 +112,6 @@ export default {
         margin: 1em;
     }
 
-    .back_button {
-        border-radius: 4px;
-        background-color: rgb(245, 129, 87);
-        padding: 10px;
-        cursor: pointer;
-        margin: 1em;
-    }
 
     @font-face {
         font-family: myFamily;

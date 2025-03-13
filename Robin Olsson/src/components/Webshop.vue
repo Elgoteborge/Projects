@@ -72,18 +72,6 @@
         <div>
             <h1 class="slogan"> {{ msg }}</h1>
         </div>
-        <!--<div class="cart_container">
-            <div class="cart_badge">
-            <img class="cart_image" src="/assets/cart.jpg" alt="Cart icon" @click="goToCart">
-            <span v-if="cartStore.cart.length > 0" class="cart-badge">
-                {{ cartStore.cart.length }}
-            </span>
-            </div>
-            <img class="profile_image" v-if="!isLoggedIn" src="/assets/myprofile.png" alt="My profile symbol" @click="toggleLogin">
-            <img class="profile_image" v-if="isLoggedIn" src="/assets/logout.png" alt="Log out symbol" @click="logout">
-            <img class="social_1" src="/assets/fb.png" alt="Facebook icon">
-            <img class="social" src="/assets/inst.png" alt="Instagram icon">
-        </div>-->
         <div class="icons-container">
     <div class="cart_container" @click="goToCart">
         <img class="cart_image" src="/assets/cart.jpg" alt="Cart icon">
