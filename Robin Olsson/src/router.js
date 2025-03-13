@@ -4,6 +4,7 @@ import AboutView from './views/AboutView.vue'
 import HomeView from './views/HomeView.vue'
 import ProductView from './views/ProductView.vue'
 import CartView from './views/CartView.vue'
+import CashOutView from './views/CashOutView.vue'
 
 export default createRouter({
     history: createWebHashHistory(),
@@ -23,6 +24,10 @@ export default createRouter({
         {
             component: CartView,
             path: '/Cart'
+        },
+        {
+            component: CashOutView,
+            path: '/CashOut'
         }
     ]
 })

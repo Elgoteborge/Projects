@@ -15,6 +15,9 @@ export default {
     methods: {
         goBack() {
             this.$router.push('/')
+        },
+        goToCheckout() {
+            this.$router.push('/CashOut')
         }
     }
 }
@@ -46,7 +49,7 @@ export default {
             </div>
             <div class="cart_summary">
                 <p><strong>Totalt: $ {{ cartStore.cartTotalPrice }}</strong></p>
-                <input class="cash_out_button" type="button"  value="Till kassa">
+                <input @click="goToCheckout" class="cash_out_button" type="button"  value="Till kassa">
                 <button @click="cartStore.clearCart()" class="clear_cart">❌ Töm Kundvagn</button>
             </div>
         </div>
