@@ -1,5 +1,15 @@
 <script>
+  import { useCartStore } from '../stores/cartStore'
+  import { computed } from 'vue'
+
   export default {
+
+    setup() {
+        const cartStore = useCartStore();
+        const cartItemCount = computed(() => cartStore.cart.length);
+
+        return { cartStore, cartItemCount };
+    },
     props: {
         msg: String
     },
@@ -15,6 +25,9 @@
         }
     },
     methods: {
+        goToCart() {
+            this.$router.push('/cart')
+        },
         toggleLogin() {
             if (!this.isLoggedIn) {
                 this.showLogin = true
@@ -39,7 +52,11 @@
             this.emailSubmitted = this.email
             this.email = ""
             this.buttonClicked = true
-        }
+        },
+        /*setup() {
+        const cartStore = useCartStore();
+        return { cartStore };
+    }*/
     }
   }
 </script>
@@ -55,13 +72,32 @@
         <div>
             <h1 class="slogan"> {{ msg }}</h1>
         </div>
-        <div class="cart">
-            <img class="cart_image" src="/assets/cart.jpg" alt="Cart icon">
+        <!--<div class="cart_container">
+            <div class="cart_badge">
+            <img class="cart_image" src="/assets/cart.jpg" alt="Cart icon" @click="goToCart">
+            <span v-if="cartStore.cart.length > 0" class="cart-badge">
+                {{ cartStore.cart.length }}
+            </span>
+            </div>
             <img class="profile_image" v-if="!isLoggedIn" src="/assets/myprofile.png" alt="My profile symbol" @click="toggleLogin">
             <img class="profile_image" v-if="isLoggedIn" src="/assets/logout.png" alt="Log out symbol" @click="logout">
             <img class="social_1" src="/assets/fb.png" alt="Facebook icon">
             <img class="social" src="/assets/inst.png" alt="Instagram icon">
-        </div>
+        </div>-->
+        <div class="icons-container">
+    <div class="cart_container" @click="goToCart">
+        <img class="cart_image" src="/assets/cart.jpg" alt="Cart icon">
+        <span v-if="cartStore.cart.length > 0" class="cart_badge">
+            {{ cartStore.cart.length }}
+        </span>
+    </div>
+
+    <img class="profile_image" v-if="!isLoggedIn" src="/assets/myprofile.png" alt="My profile symbol" @click="toggleLogin">
+    <img class="profile_image" v-if="isLoggedIn" src="/assets/logout.png" alt="Log out symbol" @click="logout">
+    <img class="social_1" src="/assets/fb.png" alt="Facebook icon">
+    <img class="social" src="/assets/inst.png" alt="Instagram icon">
+</div>
+
         <div v-if="showLogin" class="login-popup">
             <form @submit.prevent="login">
                 <label for="email">E-postadress:</label>
@@ -102,6 +138,34 @@
     align-items: center;
 }
 
+.icons-container {
+    display: flex;
+    align-items: center;
+}
+
+.cart_container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    margin-right: 1em;
+}
+
+.cart_badge {
+    position: absolute;
+    top: -10px;
+    right: -1px;
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    width: 14px;
+    height: 14px;
+    padding: 4px 4px;
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center;
+}
+
 .cart_image {
     height: 25px;
     cursor: pointer;
@@ -133,6 +197,10 @@
     background-color: rgba(0, 0, 0, 0.5);
     padding: 20px;
     border-radius: 8px;
+}
+
+label {
+    color: white;
 }
 
 .login-popup form {

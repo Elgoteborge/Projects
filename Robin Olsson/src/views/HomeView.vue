@@ -1,10 +1,14 @@
 <script>
+import { useCartStore } from '../stores/cartStore'
+import { defineComponent } from 'vue'
+
   export default {
     data() {
         return {
             products: [],
             selectCategory: "all",
-            defaultImage: 'https://st.depositphotos.com/1695366/1395/v/950/depositphotos_13951325-stock-illustration-cartoon-angry-man-electronics.jpg'
+            defaultImage: 'https://st.depositphotos.com/1695366/1395/v/950/depositphotos_13951325-stock-illustration-cartoon-angry-man-electronics.jpg',
+            cartStore: useCartStore()
         }
     },
     created() {
@@ -27,9 +31,13 @@
     methods: {
         productInfo(productId) {
             this.$router.push(`/product/${productId}`)
+        },
+        addToCart(product) {
+            this.cartStore.addToCart(product)
         }
     }
   }
+
 </script>
 
 <template>
@@ -48,7 +56,7 @@
             v-on:error="product.image = defaultImage"/>
             <div class="price">
                 <div class="product_price">$ {{ product.price }}</div>
-                <div class="button_container"><input class="product_button" type="button"  value="Lägg i varukorg +"></div>
+                <div class="button_container"><input class="product_button" type="button"  value="Lägg i varukorg +" @click.stop="addToCart(product)"></div>
                 <div class="title">{{ product.title }}</div>
             </div>
     </div>
@@ -123,6 +131,10 @@ select {
 }
 .product_button:hover {
     transform: scale(1.2);
+}
+
+.product_button:active {
+    background-color: rgb(58, 146, 58);
 }
 .title {
     margin-top: 1em;
